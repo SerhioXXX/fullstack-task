@@ -1,0 +1,30 @@
+{
+  "name": "fullstack-task",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "dev": "concurrently -k -n server,web -c blue,green \"npm:dev -w @app/server\" \"npm:dev -w @app/web\"",
+    "dev:mesh": "tsx scripts/dev-mesh.ts",
+    "build": "npm run build -w @app/web",
+    "typecheck": "tsc -p packages/shared && tsc -p apps/server && tsc -p apps/web && tsc -p scripts",
+    "test": "vitest run",
+    "demo:reconcile": "tsx scripts/reconcile-demo.ts",
+    "probe": "tsx scripts/ws-probe.ts",
+    "slow-client": "tsx scripts/slow-client.ts",
+    "resume-check": "tsx scripts/resume-check.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^20.17.0",
+    "concurrently": "^9.1.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.6.0",
+    "vitest": "^2.1.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
